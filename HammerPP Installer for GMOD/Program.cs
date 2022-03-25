@@ -145,7 +145,7 @@ namespace HammerPP_Installer_for_GMOD
         {
             WebClient wc = new WebClient();
             ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             wc.Headers.Add("User-Agent: retr0mod8-gmod_hammerpp_installer"); //This allows us to access the GitHub API
             wc.DownloadFile(@"https://api.github.com/repos/ficool2/HammerPlusPlus-Website/releases/latest", @Path.GetTempPath() + "tempjson");
             while (wc.IsBusy)
