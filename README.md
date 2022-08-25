@@ -1,4 +1,4 @@
-# HammerPP-GMOD-Installer
+# GarrysMod HammerPlusPlus Installer
 A program which helps with both the installation and configuration of Hammer++ for Garry's Mod
 
 This solution uses both [Costura](https://github.com/Fody/Costura) and [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json).

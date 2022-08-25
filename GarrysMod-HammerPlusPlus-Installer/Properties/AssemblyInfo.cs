@@ -1,15 +1,17 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HammerPP-Gmod-Installer-v1.0.1")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("GarrysMod HammerPlusPlus Installer")]
+[assembly: AssemblyDescription("An installer for Garry's Mod x HammerPlusPlus compatability.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HammerPP-Gmod-Installer-v1.0.1")]
-[assembly: AssemblyCopyright("Copyright © retromod8  2022")]
+[assembly: AssemblyProduct("GarrysMod-HammerPlusPlus-Installer")]
+[assembly: AssemblyCopyright("Copyright © rmod 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("86737878-cad5-4b63-be7f-e1ced1637312")]
+[assembly: Guid("1e17da02-7b0d-414b-8c89-162cf8ec59f2")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,3 +35,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("en-GB")]
