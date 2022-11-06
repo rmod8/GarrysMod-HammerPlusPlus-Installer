@@ -127,6 +127,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
                 textboxGmodDir.Text = Path.GetDirectoryName(ofd.FileName);
                 CheckDirectoryValidity();
             }
+            Console.WriteLine(GmodPath);
             ofd.Dispose();
         }
 
@@ -338,9 +339,9 @@ namespace GarrysMod_HammerPlusPlus_Installer
             addKeyvalueToConfig(GameConfigModified, "GameExe", @GmodPath + @"\hl2.exe");
             addKeyvalueToConfig(GameConfigModified, "DefaultSolidEntity", "func_detail");
             addKeyvalueToConfig(GameConfigModified, "DefaultPointEntity", "info_player_start");
-            addKeyvalueToConfig(GameConfigModified, "BSP", @SDKPath + @"\bin\vbsp.exe");
-            addKeyvalueToConfig(GameConfigModified, "Vis", @SDKPath + @"\bin\vvis.exe");
-            addKeyvalueToConfig(GameConfigModified, "Light", @SDKPath + @"\bin\vrad.exe");
+            addKeyvalueToConfig(GameConfigModified, "BSP", @GmodPath + @"\bin\vbsp.exe");
+            addKeyvalueToConfig(GameConfigModified, "Vis", @GmodPath + @"\bin\vvis.exe");
+            addKeyvalueToConfig(GameConfigModified, "Light", @GmodPath + @"\bin\vrad.exe");
             addKeyvalueToConfig(GameConfigModified, "GameExeDir", @GmodPath);
             addKeyvalueToConfig(GameConfigModified, "MapDir", @GmodPath + @"\garrysmod\mapsrc");
             addKeyvalueToConfig(GameConfigModified, "BSPDir", @GmodPath + @"\garrysmod\maps");
@@ -455,7 +456,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$bsp_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VVIS
@@ -464,7 +465,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$vis_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-fast -game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-fast -game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VRAD
@@ -473,7 +474,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$light_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-ldr -bounce 2 -noextra -game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-ldr -bounce 2 -noextra -game "+ getEscape() + GmodPath + "\\garrysmod"+getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //COPY
@@ -490,7 +491,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$game_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + @GmodPath + @"\garrysmod" + getEscape() + " +map $file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " +map $file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             SequencesModified.Add("\t}\n");
@@ -507,7 +508,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$bsp_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VVIS
@@ -516,7 +517,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$vis_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VRAD
@@ -525,7 +526,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$light_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-StaticPropLighting -final -ldr -game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-StaticPropLighting -final -ldr -game "+ getEscape() + GmodPath + "\\garrysmod"+getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //COPY
@@ -542,7 +543,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$game_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + @GmodPath + @"\garrysmod" + getEscape() + " +map $file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " +map $file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             SequencesModified.Add("\t}\n");
@@ -558,7 +559,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$bsp_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VVIS
@@ -567,7 +568,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$vis_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VRAD
@@ -576,7 +577,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$light_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-StaticPropLighting -final -hdr -game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-StaticPropLighting -final -hdr -game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //COPY
@@ -593,7 +594,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$game_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + @GmodPath + @"\garrysmod" + getEscape() + " +map $file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " +map $file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             SequencesModified.Add("\t}\n");
@@ -609,7 +610,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$bsp_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VVIS
@@ -618,7 +619,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$vis_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //VRAD
@@ -627,7 +628,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$light_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-StaticPropLighting -final -both -game $gamedir $path\\$file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-StaticPropLighting -final -both -game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " $path\\$file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             //COPY
@@ -644,7 +645,7 @@ namespace GarrysMod_HammerPlusPlus_Installer
             SequencesModified.Add("\t\t\t\"enable\"\t\t\"1\"\n");
             SequencesModified.Add("\t\t\t\"specialcmd\"\t\t\"0\"\n");
             SequencesModified.Add("\t\t\t\"run\"\t\t\"$game_exe\"\n");
-            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + @GmodPath + @"\garrysmod" + getEscape() + " +map $file\"\n");
+            SequencesModified.Add("\t\t\t\"parms\"\t\t\"-game " + getEscape() + GmodPath + "\\garrysmod" + getEscape() + " +map $file\"\n");
             SequencesModified.Add("\t\t}\n");
 
             SequencesModified.Add("\t}\n");
