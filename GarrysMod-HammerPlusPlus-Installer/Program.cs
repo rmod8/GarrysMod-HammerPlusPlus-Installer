@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GarrysMod_HammerPlusPlus_Installer
+namespace HammerPP_Manager
 {
     internal static class Program
     {
@@ -16,7 +16,18 @@ namespace GarrysMod_HammerPlusPlus_Installer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            /*
+             * We need to check if the user has run this program before.
+             * If not, we need to define a few prerequisites.
+            */
+
+            if (Properties.Settings.Default.FirstStartup)
+            {
+                Application.Run(new StartupEnterDetails());
+            }
+
+            //Application.Run(new Form1());
         }
     }
 }
