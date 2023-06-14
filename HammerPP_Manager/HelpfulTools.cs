@@ -46,6 +46,40 @@ namespace HammerPP_Manager
 
             return true;
         }
+
+        /// <summary>
+        /// Check if Hammer++ is installed in any capacity.
+        /// </summary>
+        /// <param name="basePath"></param>
+        /// <returns></returns>
+        internal static bool HPPSanityCheck(string basePath)
+        {
+            string[] DirCheckList = {
+            "\\bin\\hammerplusplus"
+            };
+
+            string[] FileCheckList = {
+                "\\bin\\hammerplusplus.exe"
+            };
+
+            for (int i = 0; i < DirCheckList.Length; i++)
+            {
+                if (!Directory.Exists(basePath + DirCheckList[i]))
+                {
+                    return false;
+                }
+            }
+
+            for (int i = 0; i < FileCheckList.Length; i++)
+            {
+                if (!File.Exists(basePath + FileCheckList[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 
 }
