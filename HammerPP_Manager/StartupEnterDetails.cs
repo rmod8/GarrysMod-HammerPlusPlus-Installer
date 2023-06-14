@@ -15,6 +15,8 @@ namespace HammerPP_Manager
 {
     public partial class StartupEnterDetails : Form
     {
+        //Botch variable
+        bool IsContinuing = false;
         //Setting up sound objects.
         SoundPlayer sfxGranted = new SoundPlayer(Properties.Resources.granted);
         SoundPlayer sfxDenied = new SoundPlayer(Properties.Resources.denied);
@@ -30,7 +32,7 @@ namespace HammerPP_Manager
             if(Directory.Exists(defaultSDKPath))
             {
                 //This is ubsurdly long
-                if(MessageBox.Show("Hammer++ Manager Detected a Source SDK Base 2013 Multilayer Installation on your C: Drive.\nWould you like to use this path?", "Auto-Select Installation on C: Drive - Hammer++ Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                if(MessageBox.Show("Hammer++ Manager Detected a Source SDK Base 2013 Multiplayer Installation on your C: Drive.\nWould you like to use this path?", "Auto-Select Installation on C: Drive - Hammer++ Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     //ChangePaths trims the bottom part because of how OpenFileDialog works. Maybe in
                     //future we trim in the browse button and remove the trimming from ChangePaths.
@@ -39,14 +41,34 @@ namespace HammerPP_Manager
             }
             else
             {
+                //Scans other drives for sdk installation
                 DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+                //If theres more than 1 drive...
                 if (allDrives.Length > 1)
                 {
+                    //For each drive mounted...
                     for (int i = 0; i < allDrives.Length; i++)
                     {
+                        //If current drive is not c:...
                         if(allDrives[i].Name != "C:\\")
                         {
-                            throw new NotImplementedException();
+                            string otherSDKPath = allDrives[i].Name + "SteamLibrary\\steamapps\\common\\Source SDK Base 2013 Multiplayer";
+                            //If drive has path...
+                            if (Directory.Exists(otherSDKPath))
+                            {
+                                //If path is valid...
+                                if (HelpfulTools.SDKSanityCheck(otherSDKPath))
+                                {
+                                    //If user is happy with using the discovered and legit path...
+                                    if (MessageBox.Show("Hammer++ Manager Detected a Source SDK Base 2013 Multilayer Installation on your " + allDrives[i].Name.Substring(0, 1) +": Drive.\nWould you like to use this path?", "Auto-Select Installation on "+ allDrives[i].Name.Substring(0, 1)+": Drive - Hammer++ Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                                    {
+                                        //ChangePaths trims the bottom part because of how OpenFileDialog works. Maybe in
+                                        //future we trim in the browse button and remove the trimming from ChangePaths.
+                                        ChangePaths(otherSDKPath + "\\[Folder Selection]");
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -58,6 +80,7 @@ namespace HammerPP_Manager
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
+            this.IsContinuing = true;
             Properties.Settings.Default.SdkPath = tboxSDKPath.Text;
             Properties.Settings.Default.FirstStartup = false;
             Properties.Settings.Default.Save();
@@ -116,7 +139,10 @@ namespace HammerPP_Manager
             this.ActiveControl = null;
         }
 
-
-        
+        private void OnClickExit(object sender, EventArgs e)
+        {
+            if(!this.IsContinuing)
+                Environment.Exit(1);
+        }
     }
 }
