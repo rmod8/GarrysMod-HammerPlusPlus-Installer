@@ -283,6 +283,7 @@ namespace HammerPP_Manager
                 {
                     MessageBox.Show("Please select a game configuration in Hammer++\nWhen done, click 'OK' button here.", "", MessageBoxButtons.OK);
                 }
+                ConsoleWrite("Hammer++ Config Detected! We are ready to go!");
             }
         }
 
