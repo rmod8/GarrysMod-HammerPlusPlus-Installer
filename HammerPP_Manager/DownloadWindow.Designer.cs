@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadWindow));
             this.pbDownload = new System.Windows.Forms.ProgressBar();
-            this.buttonAbort = new System.Windows.Forms.Button();
             this.textboxConsole = new System.Windows.Forms.TextBox();
+            this.labelProgress = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // pbDownload
@@ -40,16 +40,6 @@
             this.pbDownload.Name = "pbDownload";
             this.pbDownload.Size = new System.Drawing.Size(377, 23);
             this.pbDownload.TabIndex = 0;
-            // 
-            // buttonAbort
-            // 
-            this.buttonAbort.Location = new System.Drawing.Point(12, 156);
-            this.buttonAbort.Name = "buttonAbort";
-            this.buttonAbort.Size = new System.Drawing.Size(377, 23);
-            this.buttonAbort.TabIndex = 1;
-            this.buttonAbort.Text = "Abort";
-            this.buttonAbort.UseVisualStyleBackColor = true;
-            this.buttonAbort.Click += new System.EventHandler(this.buttonAbort_Click);
             // 
             // textboxConsole
             // 
@@ -63,14 +53,24 @@
             this.textboxConsole.Size = new System.Drawing.Size(377, 109);
             this.textboxConsole.TabIndex = 2;
             // 
+            // labelProgress
+            // 
+            this.labelProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelProgress.Location = new System.Drawing.Point(0, 160);
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(401, 13);
+            this.labelProgress.TabIndex = 3;
+            this.labelProgress.Text = "Standby...";
+            this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // DownloadWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 186);
+            this.ClientSize = new System.Drawing.Size(401, 173);
             this.ControlBox = false;
+            this.Controls.Add(this.labelProgress);
             this.Controls.Add(this.textboxConsole);
-            this.Controls.Add(this.buttonAbort);
             this.Controls.Add(this.pbDownload);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -87,7 +87,7 @@
         #endregion
 
         private System.Windows.Forms.ProgressBar pbDownload;
-        private System.Windows.Forms.Button buttonAbort;
         private System.Windows.Forms.TextBox textboxConsole;
+        private System.Windows.Forms.Label labelProgress;
     }
 }
