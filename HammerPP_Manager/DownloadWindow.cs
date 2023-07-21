@@ -12,6 +12,8 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace HammerPP_Manager
 {
@@ -30,10 +32,22 @@ namespace HammerPP_Manager
                 DialogResult diagReInstall = MessageBox.Show("Hammer++ is already installed for Source SDK Base 2013!\nUnfortunatley, we need to clean it's installation which means you will lose any configurations and files in the 'hammerplusplus' folder in Source SDK 2013 MP.\nDo you wish to continue?", "H++ Already Installed - Hammer++ Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (diagReInstall == DialogResult.Yes)
                 {
-                    if (Directory.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus"))
-                        Directory.Delete(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus", true);
-                    if (File.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe"))
-                        File.Delete(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe");
+                    try
+                    {
+                        if (Directory.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus"))
+                            Directory.Delete(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus", true);
+                        if (File.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe"))
+                            File.Delete(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe");
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Close Hammer++ and try again!", "", MessageBoxButtons.OK);
+                        if (isUpdate)
+                            this.Close();
+                        else
+                            Environment.Exit(1);
+                    }
+                    
                 }
                 else
                 {
@@ -206,9 +220,10 @@ namespace HammerPP_Manager
             }
             else
             {
-                ConsoleWrite("Download successfull, deserializing ZIP...");
+                ConsoleWrite("Download successful, deserializing ZIP...");
                 byte[] downloadedData = e.Result;
 
+                //Extract ZIP file
                 using (MemoryStream stream = new MemoryStream(downloadedData))
                 {
                     using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
@@ -257,10 +272,20 @@ namespace HammerPP_Manager
                             }
                             Console.WriteLine("-----------------------");
                         }
-                        ConsoleWrite("Extracted " + archive.Entries.Count + "files. A total of ~" + ((totalUncompressedSize/1024)/1024).ToString("0.00") + "MBs of data.");
+                        ConsoleWrite("Extracted " + archive.Entries.Count + " files. A total of ~" + ((totalUncompressedSize/1024)/1024).ToString("0.00") + "MBs of data.");
                     }
+                }
+
+                MessageBox.Show("To properly setup the program, we need to launch the program atleast once.\nWhen you press 'OK', Hammer++ will open. Select any game configuration, then close Hammer++ when the Hammer++ logo disappears.", "Important!", MessageBoxButtons.OK);
+                Process.Start(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe");
+                //Launch the program to generate configurations
+                while (!File.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus\\hammerplusplus_sequences.cfg"))
+                {
+                    MessageBox.Show("Please select a game configuration in Hammer++\nWhen done, click 'OK' button here.", "", MessageBoxButtons.OK);
                 }
             }
         }
+
+       
     }
 }
