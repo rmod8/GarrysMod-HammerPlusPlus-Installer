@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace HammerPP_Manager
 {
@@ -30,6 +31,7 @@ namespace HammerPP_Manager
             listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
             listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
             listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            new GameConfig(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus\\hammerplusplus_gameconfig.txt");
         }
 
         private void buttonChangeSDKPath_Click(object sender, EventArgs e)
@@ -42,8 +44,32 @@ namespace HammerPP_Manager
 
     internal struct GameConfig
     {
+        GameConfigEntry[] GameConfigs;
+        internal string SDKVersion;
 
-        internal byte SDKVersion;
+        /// <summary>
+        /// Reads GameConfig from file and returns GameConfig Struct
+        /// </summary>
+        /// <param name="Path"></param>
+        internal GameConfig(string Path)
+        {
+            if (!File.Exists(Path))
+                throw new FileNotFoundException();
+            FileStream fs = File.OpenRead(Path);
+            MemoryStream GameConfigMS = new MemoryStream();
+            fs.CopyTo(GameConfigMS);
+            BinaryReader GameConfigBR = new BinaryReader(GameConfigMS);
+            GameConfigMS.Position = 0;
+
+            if (GameConfigMS.Length < 9)
+                throw new EndOfStreamException();
+            if (new string(GameConfigBR.ReadChars(9)) != "\"Configs\"")
+                throw new InvalidDataException();
+
+            //To-Do: Finish this!
+            this.SDKVersion = null;
+            this.GameConfigs = null;
+        }
     }
 
     internal struct GameConfigEntry
@@ -55,19 +81,19 @@ namespace HammerPP_Manager
         //FGD files
         internal string[] GameData;
         //Texture Format
-        internal byte TextureFormat;
+        internal string TextureFormat;
         //Map Format
-        internal byte MapFormat;
+        internal string MapFormat;
         //Default Texture Scale in Hammer Editor
-        internal float DefTextureScale;
+        internal string TextureScale;
         //Default Lightmap Scale in Hammer Editor
-        internal float DefLightMapScale;
+        internal string LightMapScale;
         //Path to the game's executable file
         internal string GameExec;
         //Default Brush Entity
-        internal string DefBrushEntity;
+        internal string BrushEntity;
         //Default Point Entity
-        internal string DefPointEntity;
+        internal string PointEntity;
 
         //VBSP Path
         internal string VBSPPath;
@@ -76,6 +102,44 @@ namespace HammerPP_Manager
         //VRAD Path
         internal string VRADPath;
 
+        //Directory of game's executable
+        internal string GameExecDir;
+        //Default directory maps are prompted to save in
+        internal string MapDir;
+        //Directory compiled BSPs are put into, probably the 'maps' folder in the game directory.
+        internal string BSPDir;
+        //Default Cordon Texture
+        internal string CordonTexture;
+        //Material Exclude Count
+        internal string MaterialExcludeCount;
+        //Previous (Don't know what this does)
+        internal string Previous;
+
+        internal GameConfigEntry(string GameName, string GameDir, string[] GameData, string TextureFormat,
+            string MapFormat, string TextureScale, string LightMapScale, string GameExec, string BrushEntity,
+            string PointEntity, string VBSPPath, string VVISPath, string VRADPath, string GameExecDir,
+            string MapDir, string BSPDir, string CordonTexture, string MaterialExcludeCount, string Previous)
+        {
+            this.GameName = GameName;
+            this.GameDir = GameDir;
+            this.GameData = GameData;
+            this.TextureFormat = TextureFormat;
+            this.MapFormat = MapFormat;
+            this.TextureScale = TextureScale;
+            this.LightMapScale = LightMapScale;
+            this.GameExec = GameExec;
+            this.BrushEntity = BrushEntity;
+            this.PointEntity = PointEntity;
+            this.VBSPPath = VBSPPath;
+            this.VVISPath = VVISPath;
+            this.VRADPath = VRADPath;
+            this.GameExecDir = GameExecDir;
+            this.MapDir = MapDir;
+            this.BSPDir = BSPDir;
+            this.CordonTexture = CordonTexture;
+            this.MaterialExcludeCount = MaterialExcludeCount;
+            this.Previous = Previous;
+        }
     }
 
 }

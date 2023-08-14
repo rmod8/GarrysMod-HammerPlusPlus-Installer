@@ -40,6 +40,8 @@ namespace HammerPP_Manager
                 }
                 else
                 {
+                    Properties.Settings.Default.FirstStartup = false;
+                    Properties.Settings.Default.Save();
                     break;
                 }
             }
