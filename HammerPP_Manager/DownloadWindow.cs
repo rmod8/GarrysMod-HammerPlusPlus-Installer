@@ -282,12 +282,13 @@ namespace HammerPP_Manager
                 while (!File.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus\\hammerplusplus_sequences.cfg"))
                 {
                     MessageBox.Show("Please select a game configuration in Hammer++\nWhen done, click 'OK' button here.", "", MessageBoxButtons.OK);
-                    if (!HelpfulTools.IsHPPOpen())
+                    if (!HelpfulTools.IsHPPOpen() && !File.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus\\hammerplusplus_sequences.cfg"))
                     {
                         Process.Start(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe");
                     }
                 }
                 ConsoleWrite("Hammer++ Config Detected! We are ready to go!");
+                this.Close();
             }
         }
 

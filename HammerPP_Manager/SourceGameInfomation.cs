@@ -78,17 +78,22 @@ namespace HammerPP_Manager
             internal SourceGameType GameType { get; set; }
             internal string GameDevelopers { get; set; }
             internal string GameSteamID { get; set; }
-            internal SourceGame(string GameName, SourceGameID GameID, SourceGameType GameType, string GameDevelopers, string GameSteamID)
+            internal string GameFolder { get; set; }
+            internal SourceGame(string GameName, SourceGameID GameID, SourceGameType GameType, string GameDevelopers, string GameSteamID, string GameFolder)
             {
                 this.GameName = GameName;
                 this.GameID = GameID;
                 this.GameType = GameType;
                 this.GameDevelopers = GameDevelopers;
                 this.GameSteamID = GameSteamID;
+                this.GameFolder = GameFolder;
             }
         }
 
         static SourceGame CounterStrikeSource = 
-            new SourceGame("Counter-Strike: Source", SourceGameID.CounterStrikeSource, SourceGameType.Individual, "Valve Software", "240");
+            new SourceGame("Counter-Strike: Source", SourceGameID.CounterStrikeSource, SourceGameType.Individual, "Valve Software", "240", "Counter-Strike Source");
+
+        static SourceGame GarrysMod =
+           new SourceGame("Garry's Mod", SourceGameID.GarrysMod, SourceGameType.Individual, "Facepunch Studios", "4000", "GarrysMod");
     }
 }

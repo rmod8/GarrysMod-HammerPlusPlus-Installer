@@ -15,6 +15,21 @@ namespace HammerPP_Manager
         public MainWindow()
         {
             InitializeComponent();
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
+            listConfigs.Items.Add(new ListViewItem(new string[] { "Test1", "Test2" }));
         }
 
         private void buttonChangeSDKPath_Click(object sender, EventArgs e)
