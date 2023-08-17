@@ -23,8 +23,12 @@ namespace HammerPP_Manager
             {
                 if (Properties.Settings.Default.FirstStartup)
                 {
-                    new StartupEnterDetails(true).ShowDialog();
-                    new DownloadWindow(false).ShowDialog();
+                    StartupEnterDetails sed = new StartupEnterDetails(true);
+                    sed.ShowDialog();
+                    sed.Dispose();
+                    DownloadWindow dw = new DownloadWindow(false);
+                    dw.ShowDialog();
+                    dw.Dispose();
                 }
                 if (!HelpfulTools.SDKSanityCheck(Properties.Settings.Default.SdkPath))
                 {
