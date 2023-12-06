@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AD3AA578-DD6F-4D29-A056-447C0EE81051}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>HammerPP_Manager</RootNamespace>
-    <AssemblyName>Hammer++ Manager</AssemblyName>
+    <RootNamespace>GarrysMod_HammerPlusPlus_Installer</RootNamespace>
+    <AssemblyName>GarrysMod HammerPlusPlus Installer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -225,14 +225,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StartupEnterDetails.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartupEnterDetails.Designer.cs">
-      <DependentUpon>StartupEnterDetails.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -243,9 +246,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StartupEnterDetails.resx">
-      <DependentUpon>StartupEnterDetails.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="GarrysMod-HammerPlusPlus-Installer_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -264,8 +265,6 @@
   <ItemGroup>
     <None Include="tick.png" />
     <None Include="cross.png" />
-    <None Include="Assets\denied.wav" />
-    <None Include="Assets\granted.wav" />
     <Content Include="hppicon.ico" />
   </ItemGroup>
   <ItemGroup>
