@@ -40,42 +40,21 @@ namespace HammerPP_Manager
         }
     }
 
-    internal struct GameConfig
+    internal class GameConfig
     {
 
-        internal byte SDKVersion;
+
+        /// <summary>
+        /// Get's changed to a more friendly name read from gameinfo.txt
+        /// </summary>
+        string displayName;
+        string internalName;
+        List<GameConfigEntry> Entries;
     }
 
-    internal struct GameConfigEntry
+    internal class GameConfigEntry
     {
-        //Name of the profile
-        internal string GameName;
-        //Directory where gameinfo.txt is, alongwith game assets.
-        internal string GameDir;
-        //FGD files
-        internal string[] GameData;
-        //Texture Format
-        internal byte TextureFormat;
-        //Map Format
-        internal byte MapFormat;
-        //Default Texture Scale in Hammer Editor
-        internal float DefTextureScale;
-        //Default Lightmap Scale in Hammer Editor
-        internal float DefLightMapScale;
-        //Path to the game's executable file
-        internal string GameExec;
-        //Default Brush Entity
-        internal string DefBrushEntity;
-        //Default Point Entity
-        internal string DefPointEntity;
-
-        //VBSP Path
-        internal string VBSPPath;
-        //VVIS Path
-        internal string VVISPath;
-        //VRAD Path
-        internal string VRADPath;
-
+        bool isChecked;
+        string mountPath;
     }
-
 }
