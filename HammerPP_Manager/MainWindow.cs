@@ -55,11 +55,15 @@ namespace HammerPP_Manager
         {
             if (!File.Exists(Path))
                 throw new FileNotFoundException();
-            string[] lines = File.ReadAllLines(Path);
+            FileStream fs = File.OpenRead(Path);
+            MemoryStream GameConfigMS = new MemoryStream();
+            fs.CopyTo(GameConfigMS);
+            BinaryReader GameConfigBR = new BinaryReader(GameConfigMS);
+            GameConfigMS.Position = 0;
 
-            if (lines[0].Length != 9)
+            if (GameConfigMS.Length < 9)
                 throw new EndOfStreamException();
-            if (lines[0] != "\"Configs\"")
+            if (new string(GameConfigBR.ReadChars(9)) != "\"Configs\"")
                 throw new InvalidDataException();
 
             //To-Do: Finish this!
