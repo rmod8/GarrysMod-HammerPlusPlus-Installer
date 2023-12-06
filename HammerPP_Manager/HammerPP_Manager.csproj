@@ -286,7 +286,6 @@
     <None Include="cross.png" />
     <None Include="Assets\denied.wav" />
     <None Include="Assets\granted.wav" />
-    <None Include="add.png" />
     <Content Include="hppicon.ico" />
   </ItemGroup>
   <ItemGroup>
