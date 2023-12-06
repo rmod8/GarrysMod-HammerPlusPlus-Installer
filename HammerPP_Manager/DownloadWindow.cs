@@ -11,7 +11,6 @@ using System.Threading;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
-using System.IO.Compression;
 
 namespace HammerPP_Manager
 {
@@ -206,60 +205,10 @@ namespace HammerPP_Manager
             }
             else
             {
-                ConsoleWrite("Download successfull, deserializing ZIP...");
                 byte[] downloadedData = e.Result;
+                Console.WriteLine("Download completed. Length of downloaded data: " + downloadedData.Length);
 
-                using (MemoryStream stream = new MemoryStream(downloadedData))
-                {
-                    using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
-                    {
-                        ConsoleWrite("Extracting ZIP files to Source SDK Base 2013 Multiplayer directory...");
-                        long totalUncompressedSize = 0;
-
-                        foreach (ZipArchiveEntry entry in archive.Entries)
-                        {
-                            totalUncompressedSize += entry.Length;
-                        }
-
-                        DriveInfo destinationDrive = new DriveInfo(Path.GetPathRoot(Properties.Settings.Default.SdkPath));
-                        long freeSpace = destinationDrive.AvailableFreeSpace;
-
-                        if (freeSpace < totalUncompressedSize)
-                        {
-                            MessageBox.Show("Error: Not enough free space on the destination drive to extract the contents.");
-                            if (publicIsUpdate)
-                                this.Close();
-                            else
-                                Environment.Exit(1);
-                        }
-
-                        foreach (ZipArchiveEntry entry in archive.Entries)
-                        {
-                            Console.WriteLine("File: " + entry.FullName.Substring(entry.FullName.IndexOf('/') + 1));
-                            Console.WriteLine("Size: " + entry.Length + " bytes");
-                            //Extract file
-
-                            string extractedFilePath = Path.Combine(Properties.Settings.Default.SdkPath, entry.FullName.Substring(entry.FullName.IndexOf('/') + 1));
-                            try
-                            {
-                                string directoryPath = Path.GetDirectoryName(extractedFilePath);
-                                if (!Directory.Exists(directoryPath))
-                                {
-                                    Directory.CreateDirectory(directoryPath);
-                                }
-
-                                entry.ExtractToFile(extractedFilePath, true);
-                                Console.WriteLine("Extracted to: " + extractedFilePath);
-                            }
-                            catch (IOException ex)
-                            {
-                                Console.WriteLine("Error extracting file: " + ex.Message);
-                            }
-                            Console.WriteLine("-----------------------");
-                        }
-                        ConsoleWrite("Extracted " + archive.Entries.Count + "files. A total of ~" + ((totalUncompressedSize/1024)/1024).ToString("0.00") + "MBs of data.");
-                    }
-                }
+                // Further processing of the downloaded data if needed.
             }
         }
     }

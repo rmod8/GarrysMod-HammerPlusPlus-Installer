@@ -90,7 +90,7 @@
             this.buttonContinue.Location = new System.Drawing.Point(498, 101);
             this.buttonContinue.Name = "buttonContinue";
             this.buttonContinue.Size = new System.Drawing.Size(100, 26);
-            this.buttonContinue.TabIndex = 1;
+            this.buttonContinue.TabIndex = 6;
             this.buttonContinue.Text = "Continue...";
             this.buttonContinue.UseVisualStyleBackColor = true;
             this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
