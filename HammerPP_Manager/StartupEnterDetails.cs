@@ -17,15 +17,13 @@ namespace HammerPP_Manager
     {
         //Botch variable
         bool IsContinuing = false;
-        bool IsStandalone;
         //Setting up sound objects.
         SoundPlayer sfxGranted = new SoundPlayer(Properties.Resources.granted);
         SoundPlayer sfxDenied = new SoundPlayer(Properties.Resources.denied);
         string defaultSDKPath = @"C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer";
 
-        public StartupEnterDetails(bool IsStandaloneIn)
+        public StartupEnterDetails()
         {
-            this.IsStandalone = IsStandaloneIn;
             InitializeComponent();
             this.ActiveControl = null;
 
@@ -84,6 +82,7 @@ namespace HammerPP_Manager
         {
             this.IsContinuing = true;
             Properties.Settings.Default.SdkPath = tboxSDKPath.Text;
+            Properties.Settings.Default.FirstStartup = false;
             Properties.Settings.Default.Save();
             this.Close();
         }
@@ -140,16 +139,9 @@ namespace HammerPP_Manager
             this.ActiveControl = null;
         }
 
-        /// <summary>
-        /// Patchtape solution:
-        /// Prevents program from exiting if window is used in main program,
-        /// but allow program to exit if the window is all alone.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OnClickExit(object sender, EventArgs e)
         {
-            if(this.IsStandalone && !this.IsContinuing)
+            if(!this.IsContinuing)
                 Environment.Exit(1);
         }
     }

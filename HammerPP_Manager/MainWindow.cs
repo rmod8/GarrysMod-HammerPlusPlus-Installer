@@ -16,30 +16,5 @@ namespace HammerPP_Manager
         {
             InitializeComponent();
         }
-
-        private void buttonChangeSDKPath_Click(object sender, EventArgs e)
-        {
-            this.Enabled = false;
-            new StartupEnterDetails(false).ShowDialog();
-            this.Enabled = true;
-        }
-    }
-
-    internal class GameConfig
-    {
-
-
-        /// <summary>
-        /// Get's changed to a more friendly name read from gameinfo.txt
-        /// </summary>
-        string displayName;
-        string internalName;
-        List<GameConfigEntry> Entries;
-    }
-
-    internal class GameConfigEntry
-    {
-        bool isChecked;
-        string mountPath;
     }
 }

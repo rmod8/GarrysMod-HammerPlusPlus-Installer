@@ -46,17 +46,5 @@ namespace HammerPP_Manager.Properties {
                 this["SdkPath"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string InstalledTag {
-            get {
-                return ((string)(this["InstalledTag"]));
-            }
-            set {
-                this["InstalledTag"] = value;
-            }
-        }
     }
 }
