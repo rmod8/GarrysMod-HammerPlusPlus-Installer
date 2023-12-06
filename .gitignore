@@ -2,7 +2,7 @@
 /.vs/*
 /packages
 /packages/*
-/HammerPP_Manager/bin
-/HammerPP_Manager/bin/*
-/HammerPP_Manager/obj
-/HammerPP_Manager/obj/*
+/GarrysMod-HammerPlusPlus-Installer/bin
+/GarrysMod-HammerPlusPlus-Installer/bin/*
+/GarrysMod-HammerPlusPlus-Installer/obj
+/GarrysMod-HammerPlusPlus-Installer/obj/*
