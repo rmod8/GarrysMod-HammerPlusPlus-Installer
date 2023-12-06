@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Diagnostics;
 
 namespace HammerPP_Manager
 {
@@ -82,20 +81,6 @@ namespace HammerPP_Manager
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Check if Hammer++ is open.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        internal static bool IsHPPOpen()
-        {
-            // Get all running processes with the specified name
-            Process[] processes = Process.GetProcessesByName("hammerplusplus");    
-
-            // If any process with the given name is found, return true; otherwise, return false
-            return processes.Length > 0;
         }
     }
 

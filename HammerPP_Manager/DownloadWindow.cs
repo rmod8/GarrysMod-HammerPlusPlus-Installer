@@ -250,8 +250,8 @@ namespace HammerPP_Manager
 
                         foreach (ZipArchiveEntry entry in archive.Entries)
                         {
-                            //Console.WriteLine("File: " + entry.FullName.Substring(entry.FullName.IndexOf('/') + 1));
-                            //Console.WriteLine("Size: " + entry.Length + " bytes");
+                            Console.WriteLine("File: " + entry.FullName.Substring(entry.FullName.IndexOf('/') + 1));
+                            Console.WriteLine("Size: " + entry.Length + " bytes");
                             //Extract file
 
                             string extractedFilePath = Path.Combine(Properties.Settings.Default.SdkPath, entry.FullName.Substring(entry.FullName.IndexOf('/') + 1));
@@ -268,9 +268,9 @@ namespace HammerPP_Manager
                             }
                             catch (IOException ex)
                             {
-                                //ConsoleWrite("Error extracting file: " + ex.Message, DisclaimerType.Error);
+                                Console.WriteLine("Error extracting file: " + ex.Message);
                             }
-                            //Console.WriteLine("-----------------------");
+                            Console.WriteLine("-----------------------");
                         }
                         ConsoleWrite("Extracted " + archive.Entries.Count + " files. A total of ~" + ((totalUncompressedSize/1024)/1024).ToString("0.00") + "MBs of data.");
                     }
@@ -282,10 +282,6 @@ namespace HammerPP_Manager
                 while (!File.Exists(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus\\hammerplusplus_sequences.cfg"))
                 {
                     MessageBox.Show("Please select a game configuration in Hammer++\nWhen done, click 'OK' button here.", "", MessageBoxButtons.OK);
-                    if (!HelpfulTools.IsHPPOpen())
-                    {
-                        Process.Start(Properties.Settings.Default.SdkPath + "\\bin\\hammerplusplus.exe");
-                    }
                 }
                 ConsoleWrite("Hammer++ Config Detected! We are ready to go!");
             }
