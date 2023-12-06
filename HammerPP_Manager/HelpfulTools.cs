@@ -9,8 +9,6 @@ namespace HammerPP_Manager
 {
     internal static class HelpfulTools
     {
-        
-
         //Used to check sdk directory for most files and directories to confirm it's authentic
         internal static bool SDKSanityCheck(string basePath)
         {

@@ -238,7 +238,6 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="SourceGameInfomation.cs" />
     <Compile Include="StartupEnterDetails.cs">
       <SubType>Form</SubType>
     </Compile>
