@@ -18,10 +18,8 @@ namespace HammerPP_Manager
     {
         MemoryStream ZipMS;
         Thread DownloadThread;
-        bool publicIsUpdate;
         public DownloadWindow(bool isUpdate)
         {
-            this.publicIsUpdate = isUpdate;
             InitializeComponent();
 
             if (!isUpdate && HelpfulTools.HPPSanityCheck(Properties.Settings.Default.SdkPath))
@@ -37,7 +35,6 @@ namespace HammerPP_Manager
                 else
                 {
                     ConsoleWrite("User Aborted Installation!");
-                    Thread.Sleep(1000);
                     Environment.Exit(1);
                 }
             }
@@ -132,84 +129,27 @@ namespace HammerPP_Manager
 
         private void DownloadWindow_Load(object sender, EventArgs e)
         {
-            try
+            this.buttonAbort.Enabled = true;
+            //Get ZIP URL of the latest version of Hammer++
+            WebClient WebReq = new WebClient();
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            WebReq.Headers.Add("User-Agent: rmod8-hammerpp_manager");
+            string jsonString;
+            using (Stream stream = WebReq.OpenRead(@"https://api.github.com/repos/ficool2/HammerPlusPlus-Website/releases/latest"))   //modified from your code since the using statement disposes the stream automatically when done
             {
-                //Get ZIP URL of the latest version of Hammer++
-                WebClient WebReq = new WebClient();
-                ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                WebReq.Headers.Add("User-Agent: rmod8-hammerpp_manager");
-                string jsonString;
-                using (Stream stream = WebReq.OpenRead(@"https://api.github.com/repos/ficool2/HammerPlusPlus-Website/releases/latest"))   //modified from your code since the using statement disposes the stream automatically when done
-                {
-                    StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
-                    jsonString = reader.ReadToEnd();
-                }
-                ConsoleWrite("API Connection Successful!", DisclaimerType.Info);
-                WebReq.Dispose();
-                API_Request rqst = JsonConvert.DeserializeObject<API_Request>(jsonString);
-                ConsoleWrite("Got current version! Version Tag: " + rqst.tag_name, DisclaimerType.Info);
-                string downloadURL = rqst.assets[0].browser_download_url;
-
-                //Used later
-                string tagName = rqst.tag_name;
-                ConsoleWrite("Downloading latest version of Hammer++...", DisclaimerType.Info);
-                WebClient webClient = new WebClient();
-                webClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
-                webClient.DownloadDataCompleted += WebClient_DownloadDataCompleted;
-
-                webClient.DownloadDataAsync(new Uri(downloadURL));
+                StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+                jsonString = reader.ReadToEnd();
             }
-            catch (WebException)
-            {
-                if (!publicIsUpdate)
-                {
-                    MessageBox.Show("Failed to connect to GitHub API.\nCheck your internet connection or check if GitHub is down.\nPress \'OK\' to close this application.");
-                    ConsoleWrite("No Connection!");
-                    Thread.Sleep(1000);
-                    Environment.Exit(1);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to connect to GitHub API.\nCheck your internet connection or check if GitHub is down.\nPress \'OK\' to return to the main menu.");
-                    this.Close();
-                }
-            }
-        }
+            ConsoleWrite("API Connection Successful!", DisclaimerType.Info);
+            WebReq.Dispose();
+            API_Request rqst = JsonConvert.DeserializeObject<API_Request>(jsonString);
+            ConsoleWrite("Got current version! Version Tag: " + rqst.tag_name, DisclaimerType.Info);
+            string downloadURL = rqst.assets[0].browser_download_url;
 
-        private void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            //Shows fancy facts & logic for the progress bar.
-            //Thanks ChatGPT for writing this code.
-            pbDownload.Value = e.ProgressPercentage;
-            double bytesIn = double.Parse(e.BytesReceived.ToString());
-            double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-            double speed = bytesIn / e.ProgressPercentage;
-            string speedText = string.Format("{0} KB/s", (speed / 1024).ToString("0.00"));
-            string downloadedText = string.Format("{0} MB / {1} MB", (bytesIn / (1024 * 1024)).ToString("0.00"), (totalBytes / (1024 * 1024)).ToString("0.00"));
-
-            labelProgress.Text = $"Downloading... {downloadedText} ({speedText})";
-
-
-        }
-
-        private void WebClient_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                MessageBox.Show("An error occurred during download: " + e.Error.Message+"\nCheck your internet connection!", "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (!publicIsUpdate)
-                    Environment.Exit(1);
-                else
-                    this.Close();
-            }
-            else
-            {
-                byte[] downloadedData = e.Result;
-                Console.WriteLine("Download completed. Length of downloaded data: " + downloadedData.Length);
-
-                // Further processing of the downloaded data if needed.
-            }
-        }
+            //Used later
+            string tagName = rqst.tag_name;
+            ConsoleWrite("Downloading latest version of Hammer++...", DisclaimerType.Info);
+            
     }
 }
