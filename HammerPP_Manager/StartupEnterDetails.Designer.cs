@@ -131,9 +131,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "StartupEnterDetails";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome! - Hammer++ Manager";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClickExit);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxOkay)).EndInit();
